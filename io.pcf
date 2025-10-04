@@ -5,4 +5,5 @@ set_io switched[2] 28
 set_io reset 20
 set_io clock_100 13
 set_io d_o 11
+set_io led_dbg_o 39
 

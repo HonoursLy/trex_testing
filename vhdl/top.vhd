@@ -7,7 +7,8 @@ entity top is
 		switched : in STD_LOGIC_VECTOR (2 downto 0);
 		reset : in STD_LOGIC;
 		clock_100 : in std_logic;
-		d_o : out std_logic
+		d_o : out std_logic;
+		led_dbg_o : out std_logic
 	);
 end top;
 
@@ -36,8 +37,8 @@ begin
 
 	clk15 : clk_divider
 	generic map (
-		Freq_in => 100000000,
-		N => 3
+		Freq_in => 33,
+		N => 1
 	)
 	port map (
 		clk_in =>clock_100,
@@ -47,8 +48,8 @@ begin
 
 	clk3 : clk_divider
 	generic map (
-		Freq_in => 100000000,
-		N => 6
+		Freq_in => 17,
+		N => 1
 	)
 	port map (
 		clk_in =>clock_100,
@@ -58,8 +59,8 @@ begin
 
 	clk45 : clk_divider
 	generic map (
-		Freq_in => 100000000,
-		N => 9
+		Freq_in => 11,
+		N => 1
 	)
 	port map (
 		clk_in =>clock_100,
@@ -69,8 +70,8 @@ begin
 	);
 	clk12 : clk_divider
 	generic map (
-		Freq_in => 100000000,
-		N => 24
+		Freq_in => 4,
+		N => 1
 	)
 	port map (
 		clk_in =>clock_100,
@@ -81,38 +82,35 @@ begin
 
 	clk24 : clk_divider
 	generic map (
-		Freq_in => 100000000,
-		N => 48
+		Freq_in => 2,
+		N => 1
 	)
 	port map (
 		clk_in =>clock_100,
 		reset => reset,
 		clk_out => clk_24
-
 	);
 
 	clk48 : clk_divider
 	generic map (
-		Freq_in => 100000000,
-		N => 96
+		Freq_in => 0,
+		N => 1
 	)
 	port map (
 		clk_in =>clock_100,
 		reset => reset,
 		clk_out => clk_48
-
 	);
 
 	clk70 : clk_divider
 	generic map (
-		Freq_in => 100000000,
-		N => 140
+		Freq_in => 0,
+		N => 1
 	)
 	port map (
 		clk_in =>clock_100,
 		reset => reset,
 		clk_out => clk_70
-
 	);
 
 	process (clock_100)
@@ -131,12 +129,14 @@ begin
 			when "111" =>
 				d_o <= clk_48;
 			when "101" =>
-				d_o <= clk_70;
+				d_o <= clock_100;
 			when "100" =>
 				d_o <= clock_100;
 			when others =>
 				d_o <= clk_15;
 		end case;
 	end process;
+
+	led_dbg_o <= '1';
 
 end architecture;
