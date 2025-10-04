@@ -15,7 +15,7 @@ architecture rtl of top is
 
 component clk_divider IS
     GENERIC (
-        Freq_in : INTEGER := 12500000,
+        Freq_in : INTEGER := 12500000;
         N : INTEGER := 2); -- 50MHz clock on DE-10 Lite FPGA board
     PORT (
         clk_in : IN STD_LOGIC;
@@ -38,31 +38,29 @@ begin
 	generic map (
 		Freq_in => 100000000,
 		N => 3
-	),
+	)
 	port map (
 		clk_in =>clock_100,
 		reset => reset,
 		clk_out => clk_15
-
 	);
 
 	clk3 : clk_divider
 	generic map (
 		Freq_in => 100000000,
 		N => 6
-	),
+	)
 	port map (
 		clk_in =>clock_100,
 		reset => reset,
 		clk_out => clk_3
-
 	);
 
 	clk45 : clk_divider
 	generic map (
 		Freq_in => 100000000,
 		N => 9
-	),
+	)
 	port map (
 		clk_in =>clock_100,
 		reset => reset,
@@ -73,7 +71,7 @@ begin
 	generic map (
 		Freq_in => 100000000,
 		N => 24
-	),
+	)
 	port map (
 		clk_in =>clock_100,
 		reset => reset,
@@ -85,7 +83,7 @@ begin
 	generic map (
 		Freq_in => 100000000,
 		N => 48
-	),
+	)
 	port map (
 		clk_in =>clock_100,
 		reset => reset,
@@ -97,7 +95,7 @@ begin
 	generic map (
 		Freq_in => 100000000,
 		N => 96
-	),
+	)
 	port map (
 		clk_in =>clock_100,
 		reset => reset,
@@ -109,7 +107,7 @@ begin
 	generic map (
 		Freq_in => 100000000,
 		N => 140
-	),
+	)
 	port map (
 		clk_in =>clock_100,
 		reset => reset,
@@ -136,5 +134,9 @@ begin
 				d_o <= clk_70;
 			when "100" =>
 				d_o <= clock_100;
+			when others =>
+				d_o <= clk_15;
+		end case;
+	end process;
 
 end architecture;

@@ -4,7 +4,7 @@ USE IEEE.numeric_std.all;
 
 ENTITY clk_divider IS
     GENERIC (
-        Freq_in : INTEGER := 12500000,
+        Freq_in : INTEGER := 12500000;
         N : INTEGER := 2); -- 50MHz clock on DE-10 Lite FPGA board
     PORT (
         clk_in : IN STD_LOGIC;
