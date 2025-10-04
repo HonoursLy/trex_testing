@@ -1,5 +1,8 @@
-set_io a_i 18
-set_io b_i 19
-set_io c_i 20
+set_io switched[0] 10
+set_io switched[1] 25
+set_io switched[2] 28
 
-set_io d_o 39
+set_io reset 20
+set_io clock_100 13
+set_io d_o 11
+
