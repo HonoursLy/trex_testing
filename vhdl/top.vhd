@@ -94,7 +94,7 @@ begin
 
 	clk25 : clk_divider
 	generic map (
-		Freq_in => ,
+		Freq_in => 1,
 		N => 1
 	)
 	port map (
