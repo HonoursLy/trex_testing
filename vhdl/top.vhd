@@ -130,7 +130,7 @@ begin
 			when "111" =>
 				d_o <= clk_48;
 			when "101" =>
-				d_o <= clock_70;
+				d_o <= clk_70;
 			when "100" =>
 				d_o <= clock_100;
 			when others =>
