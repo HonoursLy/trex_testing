@@ -7,6 +7,7 @@ entity top is
 		switched : in STD_LOGIC_VECTOR (2 downto 0);
 		reset : in STD_LOGIC;
 		clock_100 : in std_logic;
+		ulpi_clk : in std_logic; -- pin 2
 		d_o : out std_logic;
 		led_dbg_o : out std_logic
 	);
@@ -70,7 +71,7 @@ begin
 	);
 	clk12 : clk_divider
 	generic map (
-		Freq_in => 4,
+		Freq_in => 3,
 		N => 1
 	)
 	port map (
@@ -91,9 +92,9 @@ begin
 		clk_out => clk_24
 	);
 
-	clk48 : clk_divider
+	clk25 : clk_divider
 	generic map (
-		Freq_in => 0,
+		Freq_in => ,
 		N => 1
 	)
 	port map (
@@ -102,13 +103,13 @@ begin
 		clk_out => clk_48
 	);
 
-	clk70 : clk_divider
+	clk36 : clk_divider
 	generic map (
 		Freq_in => 0,
 		N => 1
 	)
 	port map (
-		clk_in =>clock_100,
+		clk_in =>ulpi_clk,
 		reset => reset,
 		clk_out => clk_70
 	);
@@ -129,7 +130,7 @@ begin
 			when "111" =>
 				d_o <= clk_48;
 			when "101" =>
-				d_o <= clock_100;
+				d_o <= clock_70;
 			when "100" =>
 				d_o <= clock_100;
 			when others =>
@@ -138,5 +139,8 @@ begin
 	end process;
 
 	led_dbg_o <= '1';
+
+
+
 
 end architecture;
